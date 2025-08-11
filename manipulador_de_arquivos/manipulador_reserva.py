@@ -6,31 +6,26 @@ def ler_arquivo (nome_arquivo, modo):
             conteudo = f.read()
         return conteudo
     
-def cadastrar_reserva(nome, cpf, numerotelf, quarto, tipo_quarto, dias):
+def cadastrar_reserva(nome, cpf, numerotel, quarto, tipo_quarto, dias):
     try:
         from python.hospede import Hospede
         from python.quarto import Quarto
         from python.reserva import Reserva
 
-        if os.path.exists(caminho_arquivo):
-            with open(caminho_arquivo, "r") as arquivo:
-                for linha in arquivo:
-                    partes = linha.strip().split(';')
-                    if len(partes) >= 4:
-                        numero_quarto_existente = partes[3].strip()
-                        if numero_quarto_existente == str(quarto):
-                            return False
+        hospede = Hospede(nome, cpf, numerotel)
 
-        hospede = Hospede(nome, cpf, numerotelf)
         quarto_obj = Quarto(quarto, tipo_quarto)
+
         reserva = Reserva(hospede, quarto_obj, int(dias))
         linha = f"{reserva.hospede.nome};{reserva.hospede.cpf};{reserva.hospede.numerotelef};{reserva.quarto.numeroquart};{reserva.quarto.tipo};{reserva.dias};{reserva.quarto.ocupado}"
         with open(caminho_arquivo, "a") as arquivo:
             arquivo.write(linha + "\n")
+
         return True
     except Exception as e:
         print("Erro ao cadastrar:", e)
         return False
+
 
 
 def buscar_reserva(nome):
