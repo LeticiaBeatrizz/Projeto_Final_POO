@@ -5,24 +5,6 @@ from manipulador_de_arquivos.manipulador_reserva import remover_reserva
 class TelaCancelarReserva:
     def __init__(self, container):
         self.criar_widgets(container)
-
-    def criar_abas(self):
-        style = ttk.Style()
-        style.configure("TNotebook.Tab", padding=[10, 5])
-        self.notebook = ttk.Notebook(self.janela)
-        self.notebook.pack(expand=True, fill="both")
-
-        aba_reserva = ttk.Frame(self.notebook)
-        aba_buscar = ttk.Frame(self.notebook)
-        aba_cancelar = ttk.Frame(self.notebook)
-        aba_checagem = ttk.Frame(self.notebook)
-
-        self.notebook.add(aba_reserva, text="Reserva")
-        self.notebook.add(aba_buscar, text="Buscar")
-        self.notebook.add(aba_checagem, text="Checagem")
-        self.notebook.add(aba_cancelar, text="Cancelar")
-
-        self.criar_widgets(aba_cancelar)
         
     def criar_widgets(self, container):
         self.label_titulo = tk.Label(container, text="Cancelar Reserva\nInforme o nome do hóspede:")
