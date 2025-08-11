@@ -105,7 +105,8 @@ class TelaReserva:
 
         try:
             dias_int = int(dias)
-            if cadastrar_reserva(nome, cpf, telefone, quarto, tipo_quarto, dias):
+            resultado = cadastrar_reserva(nome, cpf, telefone, quarto, tipo_quarto, dias)
+            if resultado:
                 messagebox.showinfo("Sucesso", "Reserva realizada com sucesso!")
                 self.limpar_campos()
                 mensagem = "Reserva realizada com sucesso!\n"
@@ -114,7 +115,8 @@ class TelaReserva:
                 mensagem += f"Telefone: {telefone}\n"
                 mensagem += f"Quarto: {quarto} ({tipo_quarto})\n"
                 mensagem += f"Dias: {dias_int}"
-
+            else:
+                messagebox.showerror("Erro", f"O quarto {quarto} já está ocupado. Escolha outro quarto ou aguarde o check-out.")
         except ValueError:
             messagebox.showerror("Erro", "O campo 'Dias' deve ser um número inteiro!")
 
